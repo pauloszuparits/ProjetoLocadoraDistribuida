@@ -44,7 +44,7 @@ public class Cliente {
             System.out.println("3 - Buscar Filme");//
             System.out.println("4 - Listar Clientes");//
             System.out.println("5 - Listar Filmes");//
-            System.out.println("6 - Remover Cliente");
+            System.out.println("6 - Remover Cliente");//
             System.out.println("7 - Remover Filme");
             option = in.nextInt();
             //TODO fazer if para saida antes de começar, eviando um option para o servidor
@@ -99,6 +99,14 @@ public class Cliente {
                     cpf = in.next();
                     
                     req = new MsgReq(cpf, option);
+                    break;
+                case 7: //remover filme
+                    System.out.println("Digite o nome do filme que deseja remover");
+                    nomeFilme = in.next();
+                    System.out.println("Digite o ano deste filme");
+                    ano = in.nextInt();
+                    
+                    req = new MsgReq(nomeFilme, ano, option);
                     break;
                 case 1313:
                     System.out.println("Fechando o sistema ...");

@@ -129,17 +129,33 @@ public class Servidor {
                                     break;
                                 }
                             }
-                            Usuario removido = usuarios.remove(posicao);
+                            Usuario removidoC = usuarios.remove(posicao);
                             
                             if(posicao == -1){
                                 resposta.setStatus(2);
                             }else{
                                 resposta.setStatus(3);
-                                resposta.setResposta(removido.toString());
+                                resposta.setResposta(removidoC.toString());
                             }
                             
                             break;
+                        case (7): //remover filme
+                            posicao = -1;
+                            for(int i = 0; i < filmes.size(); i++){
+                                if(filmes.get(i).getNome().equals(req.getNomeFilme()) && filmes.get(i).getAno() == req.getAno()){
+                                    posicao=i;
+                                    break;
+                                }                               
+                            }
                             
+                            Filme removidoF = filmes.remove(posicao);
+                            
+                            if(posicao == -1){
+                                resposta.setStatus(2);
+                            }else{
+                                resposta.setStatus(4);
+                                resposta.setResposta(removidoF.toString());
+                            }
                         default:
                             //TODO resposta para o cliente que o servidor fechou
                             break;
