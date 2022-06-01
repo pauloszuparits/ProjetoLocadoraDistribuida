@@ -76,12 +76,13 @@ public class Servidor {
                             }
                             
                             
-                            resposta.setResposta(usuarios.get(posicao).toString());
+                            
                             
                             if(posicao == -1){
                                 resposta.setStatus(2);
                             }else{
                                 resposta.setStatus(1);
+                                resposta.setResposta(usuarios.get(posicao).toString());
                             }
                             
                             break;
@@ -99,28 +100,40 @@ public class Servidor {
                                 resposta.setStatus(2);
                             }else{
                                 resposta.setStatus(1);
+                                resposta.setResposta(filmes.get(posicao).toString());
                             }
                             
-                            resposta.setResposta(filmes.get(posicao).toString());
+                            
                             break;
                         
-                        case(4)://listar clientes
-                            String compilado = "";
-                            for(int i = 0; i < usuarios.size(); i++){
-                                compilado += usuarios.get(i).toString() + "\n";
+                        case(4)://listar clientes 
+                            if(usuarios.size() == 0){
+                                resposta.setStatus(4);
+                                break;
+                            }else{
+                                String compilado = "";
+                                for(int i = 0; i < usuarios.size(); i++){
+                                    compilado += usuarios.get(i).toString() + "\n";
+                                }
+
+                                resposta.setResposta(compilado);
+                                resposta.setStatus(1);
                             }
-                            
-                            resposta.setResposta(compilado);
-                            resposta.setStatus(1);
                             break;
                         case (5): //listar filmes
-                            compilado = " ";
-                            for(int i = 0; i < filmes.size(); i++){
-                                compilado += filmes.get(i).toString() + "\n";
+                            if(filmes.size()==0){
+                                resposta.setStatus(5);
+                                break;
+                            }else{
+                                String compilado = " ";
+                                for(int i = 0; i < filmes.size(); i++){
+                                    compilado += filmes.get(i).toString() + "\n";
+                                }
+
+                                resposta.setResposta(compilado);
+                                resposta.setStatus(1);
+                                break;
                             }
-                            
-                            resposta.setResposta(compilado);
-                            resposta.setStatus(1);
                         case (6): //remover cliente
                             posicao = -1;
                             for(int i = 0; i < usuarios.size(); i++){
@@ -129,12 +142,13 @@ public class Servidor {
                                     break;
                                 }
                             }
-                            Usuario removidoC = usuarios.remove(posicao);
+                            
                             
                             if(posicao == -1){
                                 resposta.setStatus(2);
                             }else{
                                 resposta.setStatus(3);
+                                Usuario removidoC = usuarios.remove(posicao);
                                 resposta.setResposta(removidoC.toString());
                             }
                             
@@ -148,12 +162,13 @@ public class Servidor {
                                 }                               
                             }
                             
-                            Filme removidoF = filmes.remove(posicao);
+                            
                             
                             if(posicao == -1){
                                 resposta.setStatus(2);
                             }else{
                                 resposta.setStatus(4);
+                                Filme removidoF = filmes.remove(posicao);
                                 resposta.setResposta(removidoF.toString());
                             }
                         default:

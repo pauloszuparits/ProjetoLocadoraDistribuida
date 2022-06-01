@@ -137,6 +137,12 @@ public class Cliente {
                     System.out.println("Usuário removido com sucesso");
                     System.out.println(resposta.getResposta());
                     break;
+                case(4):
+                    System.out.println("Lista de usuarios vazia!");
+                    break;
+                case(5):
+                    System.out.println("Lista de filmes vazia");
+                    break;
             }
             
             System.out.println("Deseja sair, para sair digite o código 1313");

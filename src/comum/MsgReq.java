@@ -37,7 +37,7 @@ public class MsgReq implements Serializable{
     public MsgReq() {
     }
     
-    public MsgReq(String cpf, int opcao) { //bucar user
+    public MsgReq(String cpf, int opcao) { //bucar user / remover
         this.cpf = cpf;
         this.opcao = opcao;
     }
