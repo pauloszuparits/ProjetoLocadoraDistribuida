@@ -113,6 +113,32 @@ public class Servidor {
                             resposta.setResposta(compilado);
                             resposta.setStatus(1);
                             break;
+                        case (5): //listar filmes
+                            compilado = " ";
+                            for(int i = 0; i < filmes.size(); i++){
+                                compilado += filmes.get(i).toString() + "\n";
+                            }
+                            
+                            resposta.setResposta(compilado);
+                            resposta.setStatus(1);
+                        case (6): //remover cliente
+                            posicao = -1;
+                            for(int i = 0; i < usuarios.size(); i++){
+                                if(usuarios.get(i).getCpf().equals(req.getCpf())){
+                                    posicao = i;
+                                    break;
+                                }
+                            }
+                            Usuario removido = usuarios.remove(posicao);
+                            
+                            if(posicao == -1){
+                                resposta.setStatus(2);
+                            }else{
+                                resposta.setStatus(3);
+                                resposta.setResposta(removido.toString());
+                            }
+                            
+                            break;
                             
                         default:
                             //TODO resposta para o cliente que o servidor fechou
@@ -147,4 +173,8 @@ public class Servidor {
         }
         return ret;
     }
+    
+    
 }
+    
+    

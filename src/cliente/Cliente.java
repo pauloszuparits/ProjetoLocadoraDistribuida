@@ -43,7 +43,7 @@ public class Cliente {
             System.out.println("2 - Buscar Cliente");//
             System.out.println("3 - Buscar Filme");//
             System.out.println("4 - Listar Clientes");//
-            System.out.println("5 - Listar Filmes");
+            System.out.println("5 - Listar Filmes");//
             System.out.println("6 - Remover Cliente");
             System.out.println("7 - Remover Filme");
             option = in.nextInt();
@@ -91,6 +91,15 @@ public class Cliente {
                 case 4: //listar usuarios
                     req = new MsgReq(option);
                     break;
+                case 5: //listar filmes
+                    req = new MsgReq(option);
+                    break;
+                case 6: //remover cliente
+                    System.out.println("Digite o cpf do cliente que deseja remover");
+                    cpf = in.next();
+                    
+                    req = new MsgReq(cpf, option);
+                    break;
                 case 1313:
                     System.out.println("Fechando o sistema ...");
                     req = new MsgReq(option);
@@ -116,7 +125,10 @@ public class Cliente {
                 case(2):
                     System.out.println("Usuário não encontrado");
                     break;
-                
+                case(3):
+                    System.out.println("Usuário removido com sucesso");
+                    System.out.println(resposta.getResposta());
+                    break;
             }
             
             System.out.println("Deseja sair, para sair digite o código 1313");
