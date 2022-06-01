@@ -143,6 +143,10 @@ public class Cliente {
                 case(5):
                     System.out.println("Lista de filmes vazia");
                     break;
+                case(6):
+                    System.out.println("Filme removido com sucesso");
+                    System.out.println(resposta.getResposta());
+                    break;
             }
             
             System.out.println("Deseja sair, para sair digite o código 1313");

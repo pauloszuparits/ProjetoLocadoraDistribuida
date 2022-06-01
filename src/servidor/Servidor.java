@@ -167,10 +167,11 @@ public class Servidor {
                             if(posicao == -1){
                                 resposta.setStatus(2);
                             }else{
-                                resposta.setStatus(4);
+                                resposta.setStatus(6);
                                 Filme removidoF = filmes.remove(posicao);
                                 resposta.setResposta(removidoF.toString());
                             }
+                            break;
                         default:
                             //TODO resposta para o cliente que o servidor fechou
                             break;
