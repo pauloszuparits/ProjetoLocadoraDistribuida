@@ -21,6 +21,7 @@ public class Usuario implements Serializable{
         this.idade = idade;
         this.id = id;
     }
+    
 
     public String getNome() {
         return nome;

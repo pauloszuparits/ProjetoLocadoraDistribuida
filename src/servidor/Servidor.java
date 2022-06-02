@@ -73,7 +73,7 @@ public class Servidor {
                             posicao = -1;
                             for(int i = 0; i < usuarios.size(); i++){
                                 if(usuarios.get(i).getCpf().equals(req.getCpf())){
-                                    posicao = i;
+                                    posicao = i; 
                                     break;
                                 }
                             }
@@ -225,6 +225,8 @@ public class Servidor {
                                     }
                                 }
                             }
+                        case 11: //devolver filme
+                            
                         default:
                             System.out.println("Servidor encerrado a conexão...");
                             resposta.setStatus(99);
@@ -247,6 +249,8 @@ public class Servidor {
                 System.out.println("Nao encerrou a conex�o corretamente" + e.getMessage());
             }
         }
+        
+        
     }
     
     static boolean connect() {
@@ -261,6 +265,36 @@ public class Servidor {
         return ret;
     }
     
+    /*static Usuario buscarUser(ArrayList usuarios, String cpf){
+         posicao = -1;
+        for(int i = 0; i < usuarios.size(); i++){
+            if(usuarios.get(i).getCpf().equals(req.getCpf())){
+                posicao = i;
+                break;
+            }
+        }
+
+        if(posicao == -1){
+            resposta.setStatus(2);
+        }else{
+            resposta.setStatus(1);
+            resposta.setResposta(usuarios.get(posicao).toString());
+        }
+        
+        int posicao = -1;
+        for(int i = 0; i < usuarios.size(); i++){
+            if(usuarios.get(i).getCpf().equals(cpf)){
+                posicao = i;
+                break;
+            }
+        }
+        
+        if(posicao == -1){
+            return -1;
+        }else{
+            return usuarios.get(posicao);
+        }
+    }*/
     
 }
     

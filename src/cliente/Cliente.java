@@ -49,6 +49,7 @@ public class Cliente {
             System.out.println("8 - Calcular taxa de aluguel");
             System.out.println("9 - Calcular Multa");
             System.out.println("10 - Alugar filme");
+            System.out.println("11 - Devolver Filme");
             System.out.println("99 - Sair");
             option = in.nextInt();
             //TODO fazer if para saida antes de começar, eviando um option para o servidor
@@ -131,6 +132,16 @@ public class Cliente {
                     cpf = in.next();
                     req = new MsgReq(nomeFilme, ano, cpf ,option);
                     break;
+                case 11: //devolver filme
+                    System.out.println("Digite o nome do filme que está sendo devolvido");
+                    nomeFilme = in.next();
+                    System.out.println("Digite o ano do filme");
+                    ano = in.nextInt();
+                    System.out.println("Digite o cpf do cliente que esta devolvendo");
+                    cpf = in.next();
+                    req = new MsgReq(nomeFilme, ano, cpf ,option);
+                    break;
+                    
                 case 99:
                     System.out.println("Fechando o sistema ...");
                     req = new MsgReq(option);
