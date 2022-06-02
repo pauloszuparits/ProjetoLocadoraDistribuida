@@ -32,11 +32,11 @@ public class Cliente {
         
         //declaração de variaveis
         String nomeCliente, sobrenome,cpf, nomeFilme, genero;
-        int idade, ano;
+        int idade, ano, dias;
         
         System.out.println("Bem vindo a locadora!");
         
-        while(option != 1313){ //loop, quebra loop com o numero 1313 digitado
+        do{ //loop, quebra loop com o numero 1313 digitado
             System.out.println("Digite uma das opções abaixo");
             System.out.println("0 - Cadastrar Cliente");//
             System.out.println("1 - Cadastrar Filme");//
@@ -45,7 +45,9 @@ public class Cliente {
             System.out.println("4 - Listar Clientes");//
             System.out.println("5 - Listar Filmes");//
             System.out.println("6 - Remover Cliente");//
-            System.out.println("7 - Remover Filme");
+            System.out.println("7 - Remover Filme");//
+            System.out.println("8 - Calcular taxa de aluguel");
+            System.out.println("99 - Sair");
             option = in.nextInt();
             //TODO fazer if para saida antes de começar, eviando um option para o servidor
             switch(option){
@@ -108,7 +110,12 @@ public class Cliente {
                     
                     req = new MsgReq(nomeFilme, ano, option);
                     break;
-                case 1313:
+                case 8: //calcular taxa
+                    System.out.println("Digite a quantidade de dias que voce deseja alugar um filme");
+                    dias = in.nextInt();
+                    req = new MsgReq(option, dias);
+                    break;
+                case 99:
                     System.out.println("Fechando o sistema ...");
                     req = new MsgReq(option);
                     break;
@@ -147,13 +154,15 @@ public class Cliente {
                     System.out.println("Filme removido com sucesso");
                     System.out.println(resposta.getResposta());
                     break;
+                case (99):
+                    System.out.println("Servidor encerrou a conexão");
+                    break;
             }
             
-            System.out.println("Deseja sair, para sair digite o código 1313");
-            option = in.nextInt(); //TODO
+            
             
     
-        }
+        }while(option != 99);
         try {
             socket.close();                               // fase de desconexao
         } catch (IOException e) {

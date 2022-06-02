@@ -172,8 +172,15 @@ public class Servidor {
                                 resposta.setResposta(removidoF.toString());
                             }
                             break;
+                        case (8): //calcular taxa
+                            double taxa = req.getDias() + 1.50;
+                            resposta.setStatus(1);
+                            resposta.setResposta("A taxa será " + taxa);
+                            break;
+                        
                         default:
-                            //TODO resposta para o cliente que o servidor fechou
+                            System.out.println("Serviro encerrado a conexão...");
+                            resposta.setStatus(99);
                             break;
                     }
 
@@ -182,13 +189,14 @@ public class Servidor {
 
                     
                 
-            }while(req.getOpcao() != 1313);
+            }while(req.getOpcao() != 99);
             
             try {
                 client_socket.close();
                 serversocket.close();
             } // desconexao
             catch (Exception e) {
+                
                 System.out.println("Nao encerrou a conex�o corretamente" + e.getMessage());
             }
         }

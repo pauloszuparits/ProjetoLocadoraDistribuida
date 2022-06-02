@@ -18,6 +18,9 @@ public class MsgReq implements Serializable{
     
     //opção
     private int opcao;
+    
+    //dias
+    private int dias;
 
     public MsgReq(String nomeFilme, String genero, int ano, int opcao) { //cadastrar cliente
         this.nomeFilme = nomeFilme;
@@ -52,6 +55,10 @@ public class MsgReq implements Serializable{
         this.opcao = opcao;
     }
     
+    public MsgReq(int opcao, int dias){
+        this.opcao = opcao;
+        this.dias = dias;
+    }
     
     //getters and setters
     public String getNomeFilme() {
@@ -124,6 +131,14 @@ public class MsgReq implements Serializable{
 
     public void setOpcao(int opcao) {
         this.opcao = opcao;
+    }
+
+    public int getDias() {
+        return dias;
+    }
+
+    public void setDias(int dias) {
+        this.dias = dias;
     }
     
     
