@@ -12,6 +12,22 @@ public class Alugado implements Serializable{
         this.idFilme = idFilme;
         this.idUsuario = idUsuario;
     }
+
+    public int getIdFilme() {
+        return idFilme;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdFilme(int idFilme) {
+        this.idFilme = idFilme;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
     
     
     

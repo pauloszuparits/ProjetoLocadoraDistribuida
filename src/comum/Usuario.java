@@ -54,9 +54,20 @@ public class Usuario implements Serializable{
         this.idade = idade;
     }
 
+    public int getId() {
+        return id;
+    }
+    
+    
+    
     @Override
     public String toString() { //TODO
-        return "Usuario{" + "nome=" + nome + ", sobrenome=" + sobrenome + ", cpf=" + cpf + ", idade=" + idade + ", id=" + id + '}';
+        
+        return "Nome Completo do Cliente: " + nome + " "+ sobrenome +
+                "\nCPF: " + cpf +
+                "\nIdade: " + idade +
+                "\nId: " + id;
+                
     }
     
     

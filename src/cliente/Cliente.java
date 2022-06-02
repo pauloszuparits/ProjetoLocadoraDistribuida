@@ -47,6 +47,8 @@ public class Cliente {
             System.out.println("6 - Remover Cliente");//
             System.out.println("7 - Remover Filme");//
             System.out.println("8 - Calcular taxa de aluguel");
+            System.out.println("9 - Calcular Multa");
+            System.out.println("10 - Alugar filme");
             System.out.println("99 - Sair");
             option = in.nextInt();
             //TODO fazer if para saida antes de começar, eviando um option para o servidor
@@ -115,6 +117,20 @@ public class Cliente {
                     dias = in.nextInt();
                     req = new MsgReq(option, dias);
                     break;
+                case 9: //calcular multa
+                    System.out.println("Digite a quantidade de dias de atraso");
+                    dias = in.nextInt();
+                    req = new MsgReq(option, dias);
+                    break;
+                case 10: //alugar filme
+                    System.out.println("Digite o nome do filme que você deseja alugar");
+                    nomeFilme = in.next();
+                    System.out.println("Digite o ano do filme");
+                    ano = in.nextInt();
+                    System.out.println("Digite o cpf do cliente");
+                    cpf = in.next();
+                    req = new MsgReq(nomeFilme, ano, cpf ,option);
+                    break;
                 case 99:
                     System.out.println("Fechando o sistema ...");
                     req = new MsgReq(option);
@@ -153,6 +169,18 @@ public class Cliente {
                 case(6):
                     System.out.println("Filme removido com sucesso");
                     System.out.println(resposta.getResposta());
+                    break;
+                case (7):
+                    System.out.println("Filme alugado com sucesso");
+                    break;
+                case(8):
+                    System.out.println("Filme não encontrado");
+                    break;
+                case(9):
+                    System.out.println("Filme alugado com sucesso");
+                    break;
+                case(10):
+                    System.out.println("Filme ja foi alugado");
                     break;
                 case (99):
                     System.out.println("Servidor encerrou a conexão");

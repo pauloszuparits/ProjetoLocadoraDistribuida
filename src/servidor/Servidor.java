@@ -27,6 +27,7 @@ public class Servidor {
         
         ArrayList<Usuario> usuarios = new ArrayList(); //instancia array list usuario
         ArrayList<Filme> filmes = new ArrayList(); //instancia array list filme
+        ArrayList<Alugado> alugados = new ArrayList(); //instancioa array list alugado
         
         //inicialização dos ID's
         int idFilme = 0;
@@ -35,6 +36,8 @@ public class Servidor {
         //instancias req, res
         MsgReq req = new MsgReq();
         MsgResp resposta = new MsgResp();
+        
+        
         
         //instancia servidor
         new Servidor();
@@ -97,7 +100,7 @@ public class Servidor {
                             }
                             
                             if(posicao == -1){
-                                resposta.setStatus(2);
+                                resposta.setStatus(8);
                             }else{
                                 resposta.setStatus(1);
                                 resposta.setResposta(filmes.get(posicao).toString());
@@ -165,7 +168,7 @@ public class Servidor {
                             
                             
                             if(posicao == -1){
-                                resposta.setStatus(2);
+                                resposta.setStatus(8);
                             }else{
                                 resposta.setStatus(6);
                                 Filme removidoF = filmes.remove(posicao);
@@ -173,13 +176,57 @@ public class Servidor {
                             }
                             break;
                         case (8): //calcular taxa
-                            double taxa = req.getDias() + 1.50;
+                            double taxa = req.getDias() * 1.50;
                             resposta.setStatus(1);
                             resposta.setResposta("A taxa será " + taxa);
                             break;
-                        
+                        case (9): //calcular multa
+                            double multa = req.getDias() * 10.50;
+                            resposta.setStatus(1);
+                            resposta.setResposta("A multa será " + multa);
+                            break;
+                        case (10): //alugar filme
+                            int posicaoC = -1;
+                            int posicaoF = -1;
+                            
+                            for(int i = 0; i < filmes.size(); i++){
+                                if(filmes.get(i).getNome().equals(req.getNomeFilme()) && filmes.get(i).getAno() == req.getAno()){
+                                    posicaoF=i;
+                                    break;
+                                }                               
+                            }
+                            
+                            for(int i = 0; i < usuarios.size(); i++){
+                                if(usuarios.get(i).getCpf().equals(req.getCpf())){
+                                    posicaoC = i;
+                                    break;
+                                }
+                            }
+                            
+                            Filme filme = filmes.get(posicaoF);
+                            Usuario cliente = usuarios.get(posicaoC);
+                           
+                            if(posicaoF == -1){
+                                resposta.setStatus(8);
+                                break;
+                            }else{
+                                if(posicaoC == -1){
+                                resposta.setStatus(2);
+                                break;
+                                }else{
+                                    if(filme.isAlugado()){
+                                        resposta.setStatus(10);
+                                        break;
+                                    }else{
+                                        alugados.add(new Alugado(filme.getId(), cliente.getId()));
+                                        filme.alugar();
+                                        resposta.setStatus(9);
+                                        break;
+                                    }
+                                }
+                            }
                         default:
-                            System.out.println("Serviro encerrado a conexão...");
+                            System.out.println("Servidor encerrado a conexão...");
                             resposta.setStatus(99);
                             break;
                     }

@@ -2,6 +2,7 @@ package comum;
 import java.io.Serializable;
 
 
+
 public class MsgReq implements Serializable{
     
     //filme
@@ -45,10 +46,17 @@ public class MsgReq implements Serializable{
         this.opcao = opcao;
     }
     
-    public MsgReq(String nomeFilme, int ano, int opcao){ //buscar filme
+    public MsgReq(String nomeFilme, int ano, int opcao){ //buscar filme / remover
         this.nomeFilme = nomeFilme;
         this.ano = ano;
         this.opcao = opcao;
+    }
+    
+    public MsgReq(String nomeFilme, int ano, String cpf, int opcao){ //buscar filme / remover
+        this.nomeFilme = nomeFilme;
+        this.ano = ano;
+        this.opcao = opcao;
+        this.cpf = cpf;
     }
     
     public MsgReq(int opcao) { 

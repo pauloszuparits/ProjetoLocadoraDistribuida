@@ -19,6 +19,10 @@ public class Filme implements Serializable{
         this.ano = ano;
         this.id = id;
     }
+    
+    public void alugar(){
+        this.alugado = !this.alugado;
+    }
 
     public String getNome() {
         return nome;
@@ -62,7 +66,13 @@ public class Filme implements Serializable{
 
     @Override
     public String toString() {
-        return "Filme{" + "nome=" + nome + ", genero=" + genero + ", ano=" + ano + ", alugado=" + alugado + ", id=" + id + '}';
+        
+        String isAlugado = (alugado) ? "Sim" : "Não"; 
+        return "Nome do Filme: " + nome + 
+                "\nGenero: " + genero + 
+                "\nAno: " + ano + 
+                "\nEstá Alugado: " + isAlugado
+                + "\nId: " + id;
     }
     
     
