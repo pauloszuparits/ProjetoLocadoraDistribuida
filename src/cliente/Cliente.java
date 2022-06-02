@@ -50,6 +50,7 @@ public class Cliente {
             System.out.println("9 - Calcular Multa");
             System.out.println("10 - Alugar filme");
             System.out.println("11 - Devolver Filme");
+            System.out.println("12 - Listar filmes alugados");
             System.out.println("99 - Sair");
             option = in.nextInt();
             //TODO fazer if para saida antes de começar, eviando um option para o servidor
@@ -141,7 +142,9 @@ public class Cliente {
                     cpf = in.next();
                     req = new MsgReq(nomeFilme, ano, cpf ,option);
                     break;
-                    
+                case 12: //mostrar lista de filmes alugados
+                    req = new MsgReq(option);
+                    break;
                 case 99:
                     System.out.println("Fechando o sistema ...");
                     req = new MsgReq(option);
@@ -193,6 +196,19 @@ public class Cliente {
                 case(10):
                     System.out.println("Filme ja foi alugado");
                     break;
+                case(11):
+                    System.out.println("Filme nao foi alugado");
+                    break;
+                case(12):
+                    System.out.println("Filme devolvido com sucesso");
+                    break;
+                case(13):
+                    System.out.println("Este filme nao foi alugado para este CPF");
+                    break;
+                case(14):
+                    System.out.println("Lista de filmes alugados vazia");
+                    break;
+                
                 case (99):
                     System.out.println("Servidor encerrou a conexão");
                     break;
@@ -205,7 +221,7 @@ public class Cliente {
         try {
             socket.close();                               // fase de desconexao
         } catch (IOException e) {
-            System.out.println("Nao encerrou a conex�o corretamente" + e.getMessage());
+            System.out.println("Nao encerrou a conexao corretamente" + e.getMessage());
         }
     }
 }
