@@ -147,8 +147,10 @@ public class Servidor {
                             
                         case (10): //alugar filme
                             resposta.setStatus(controlador.AlugarFilme(req.getNomeFilme(), req.getAno(), req.getCpf()));
+                            break;
                         case 11: //devolver filme
                             resposta.setStatus(controlador.devolverFilme(req.getNomeFilme(), req.getAno(), req.getCpf()));
+                            break;
                         case 12: //listar alugados
                             String compilado = controlador.listarAlugados();
                             

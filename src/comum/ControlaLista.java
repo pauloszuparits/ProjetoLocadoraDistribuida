@@ -179,7 +179,7 @@ public class ControlaLista implements Serializable{
     }
     
     public String listarAlugados(){
-        String compilado = " ";
+        String compilado = "";
         for(int i = 0; i<alugados.size(); i++){
 
             for(int q = 0; q< filmes.size(); q++)
