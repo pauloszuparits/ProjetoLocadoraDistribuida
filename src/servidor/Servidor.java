@@ -3,8 +3,11 @@ package servidor;
 import comum.*;
 import java.io.*;
 import java.net.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Servidor {
 
@@ -37,7 +40,7 @@ public class Servidor {
         MsgReq req = new MsgReq();
         MsgResp resposta = new MsgResp();
         
-        
+        Devolucao devolver = new Devolucao();
         
         //instancia servidor
         new Servidor();
@@ -148,9 +151,19 @@ public class Servidor {
                         case (10): //alugar filme
                             resposta.setStatus(controlador.AlugarFilme(req.getNomeFilme(), req.getAno(), req.getCpf(), req.getStartDate(), req.getEndDate()));
                             break;
-                        case 11: //devolver filme
-                            resposta.setStatus(controlador.devolverFilme(req.getNomeFilme(), req.getAno(), req.getCpf()));
+                        case 11: {
+                            
+                        try {
+                            //devolver filme
+                            devolver = controlador.devolverFilme(req.getNomeFilme(), req.getAno(), req.getCpf(), req.getEndDate());
+                            }catch (ParseException ex) {
+                                resposta.setStatus(21);
+                                }
+                            }
+                            resposta.setStatus(devolver.getStatus());
+                            resposta.setDevolver(devolver);
                             break;
+
                         case 12: //listar alugados
                             String compilado = controlador.listarAlugados();
                             

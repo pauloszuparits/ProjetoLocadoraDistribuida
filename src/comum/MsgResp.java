@@ -14,7 +14,7 @@ public class MsgResp implements Serializable{
     private ArrayList alugados;
     private String str;
     private double taxa;
-    
+    private Devolucao devolver;
 
     public MsgResp() {
         this.status = 0;
@@ -48,9 +48,16 @@ public class MsgResp implements Serializable{
         this.status = status;
         this.str = str;
     }
+
+    public Devolucao getDevolver() {
+        return devolver;
+    }
+
+    public void setDevolver(Devolucao devolver) {
+        this.devolver = devolver;
+    }
     
-    
-            
+               
     public int getStatus() {
         return status;
     }

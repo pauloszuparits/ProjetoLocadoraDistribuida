@@ -149,7 +149,9 @@ public class Cliente {
                     ano = in.nextInt();
                     System.out.println("Digite o cpf do cliente que esta devolvendo");
                     cpf = in.next();
-                    req = new MsgReq(nomeFilme, ano, cpf ,option);
+                    System.out.println("Filme devolvido no dia: (dd/MM/yyyy)");
+                    dMaE = in.next();
+                    req = new MsgReq(nomeFilme, ano, cpf, dMaE ,option);
                     break;
                 case 12: //mostrar lista de filmes alugados
                     req = new MsgReq(option);
@@ -210,6 +212,11 @@ public class Cliente {
                     break;
                 case(12):
                     System.out.println("Filme devolvido com sucesso");
+                    System.out.println("Nome do Cliente: " + resposta.getDevolver().getNomeUsuario() 
+                                       + " " + resposta.getDevolver().getSobrenome());
+                    System.out.println("Taxa: " + resposta.getDevolver().getTaxa());
+                    System.out.println("Multa: " + resposta.getDevolver().getMulta());
+                    System.out.println("Total a pagar: " + (resposta.getDevolver().getTaxa()+resposta.getDevolver().getMulta()));
                     break;
                 case(13):
                     System.out.println("Este filme nao foi alugado para este CPF");
@@ -249,7 +256,9 @@ public class Cliente {
                 case(20):
                     System.out.println(resposta.getStr());
                     break;
-                    
+                case(21):
+                    System.out.println("Erro desconhecido!, tente novamente");
+                    break;
                 case (99):
                     System.out.println("Servidor encerrou a conexão");
                     break;

@@ -8,15 +8,22 @@ public class Devolucao implements Serializable{
     private double multa;
     private String nomeFilme;
     private String nomeUsuario;
+    private String sobrenome;
 
-    public Devolucao(int status, double taxa, double multa, String nomeFilme, String nomeUsuario) {
+    public Devolucao(int status, double taxa, double multa, String nomeFilme, String nomeUsuario, String sobrenome) {
         this.status = status;
         this.taxa = taxa;
         this.multa = multa;
         this.nomeFilme = nomeFilme;
         this.nomeUsuario = nomeUsuario;
+        this.sobrenome = sobrenome;
     }
 
+    public Devolucao(int status) {
+        this.status = status;
+    }
+    
+    
     public int getStatus() {
         return status;
     }
@@ -55,6 +62,14 @@ public class Devolucao implements Serializable{
 
     public void setNomeUsuario(String nomeUsuario) {
         this.nomeUsuario = nomeUsuario;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
     
     

@@ -2,7 +2,12 @@
 package comum;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class ControlaLista implements Serializable{
     private int idUser = 0;
@@ -127,10 +132,12 @@ public class ControlaLista implements Serializable{
         }
     }
     
-    public int devolverFilme(String nomeFilme, int ano, String cpf){
+    public Devolucao devolverFilme(String nomeFilme, int ano, String cpf, String dataDevolucao) throws ParseException{
         int posicaoC = -1;
         int posicaoF = -1;
         int posicaoA = -1;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
         for(int i = 0; i < filmes.size(); i++){
             if(filmes.get(i).getNome().equals(nomeFilme) && filmes.get(i).getAno() == ano){
                 posicaoF=i;
@@ -145,10 +152,10 @@ public class ControlaLista implements Serializable{
             }
         }
         if(posicaoF == -1){
-            return 8;
+            return new Devolucao(8);//8
         }
         if(posicaoC == -1){
-            return 2;
+            return new Devolucao(2);
         }
 
 
@@ -164,16 +171,33 @@ public class ControlaLista implements Serializable{
 
         if(posicaoA == -1){
             //filme nao foi alugado
-            return 11;
+            return new Devolucao(11);
         }
 
         if(alugados.get(posicaoA).getIdUsuario() == cliente.getId()){
+            Date start = sdf.parse(alugados.get(posicaoA).getStartDate());
+            Date end = sdf.parse(alugados.get(posicaoA).getEndDate());
+            Date devolucao = sdf.parse(dataDevolucao);
+            
+            long diferencaMili = Math.abs(end.getTime() - start.getTime());
+            long diferencaMiliDev = Math.abs(devolucao.getTime() - start.getTime());
+            
+            long dias = TimeUnit.DAYS.convert(diferencaMili, TimeUnit.MILLISECONDS);
+            long diasDev = TimeUnit.DAYS.convert(diferencaMiliDev, TimeUnit.MILLISECONDS);
+            
+            double taxa = dias*1.50;
+            double multa = 0;
+            
+            if(diasDev > dias){
+                multa = 10.5 * diasDev-dias;
+            }
+            
             alugados.remove(posicaoA);
             filme.alugar();
-            return 12;
+            return new Devolucao(12, taxa, multa, filme.getNome(), cliente.getNome(), cliente.getSobrenome());
             //alugado
         }else{
-            return 13;
+            return new Devolucao(13);
             //não foi alugado para ele
         }
     }

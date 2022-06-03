@@ -50,6 +50,14 @@ public class MsgReq implements Serializable{
         this.cpf = cpf;
         this.opcao = opcao;
     }
+
+    public MsgReq(String nomeFilme, int ano,  String cpf, String endDate,int opcao) {
+        this.nomeFilme = nomeFilme;
+        this.ano = ano;
+        this.endDate = endDate;
+        this.cpf = cpf;
+        this.opcao = opcao;
+    }
     
     
     
