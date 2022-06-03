@@ -7,12 +7,16 @@ public class Alugado implements Serializable{
     
     private int idFilme;
     private int idUsuario;
+    private String startDate;
+    private String endDate;
 
-    public Alugado(int idFilme, int idUsuario) {
+    public Alugado(int idFilme, int idUsuario, String startDate, String endDate) {
         this.idFilme = idFilme;
         this.idUsuario = idUsuario;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
-
+    
     public int getIdFilme() {
         return idFilme;
     }
@@ -27,6 +31,22 @@ public class Alugado implements Serializable{
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
     
     

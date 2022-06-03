@@ -11,6 +11,10 @@ public class MsgReq implements Serializable{
     private int ano;
     private boolean alugado;
     
+    //alugados
+    private String startDate;
+    private String endDate;
+    
     //usuario
     private String nomeUsuario;
     private String sobrenomeUsuario;
@@ -37,6 +41,17 @@ public class MsgReq implements Serializable{
         this.idade = idade;
         
     }
+
+    public MsgReq(String nomeFilme, int ano, String cpf,String startDate, String endDate,  int opcao) {
+        this.nomeFilme = nomeFilme;
+        this.ano = ano;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.cpf = cpf;
+        this.opcao = opcao;
+    }
+    
+    
     
     public MsgReq() {
     }
@@ -147,6 +162,22 @@ public class MsgReq implements Serializable{
 
     public void setDias(int dias) {
         this.dias = dias;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
     
     

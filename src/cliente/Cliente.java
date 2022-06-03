@@ -35,7 +35,7 @@ public class Cliente {
         ArrayList alugados; 
         
         //declaração de variaveis
-        String nomeCliente, sobrenome,cpf, nomeFilme, genero, compilado;
+        String nomeCliente, sobrenome,cpf, nomeFilme, genero, compilado,dMaS, dMaE;
         int idade, ano, dias;
 
         
@@ -136,7 +136,11 @@ public class Cliente {
                     ano = in.nextInt();
                     System.out.println("Digite o cpf do cliente");
                     cpf = in.next();
-                    req = new MsgReq(nomeFilme, ano, cpf ,option);
+                    System.out.println("Digite o dia, mes e ano que o filme foi alugado (dd/MM/yyyy)");
+                    dMaS = in.next();
+                    System.out.println("Digite o dia, mes e ano que o filme deve ser devolvido (dd/MM/yyyy)");
+                    dMaE = in.next();
+                    req = new MsgReq(nomeFilme, ano, cpf ,dMaS,dMaE,option);
                     break;
                 case 11: //devolver filme
                     System.out.println("Digite o nome do filme que está sendo devolvido");

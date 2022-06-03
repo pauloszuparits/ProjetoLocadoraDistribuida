@@ -146,7 +146,7 @@ public class Servidor {
                             break;
                             
                         case (10): //alugar filme
-                            resposta.setStatus(controlador.AlugarFilme(req.getNomeFilme(), req.getAno(), req.getCpf()));
+                            resposta.setStatus(controlador.AlugarFilme(req.getNomeFilme(), req.getAno(), req.getCpf(), req.getStartDate(), req.getEndDate()));
                             break;
                         case 11: //devolver filme
                             resposta.setStatus(controlador.devolverFilme(req.getNomeFilme(), req.getAno(), req.getCpf()));

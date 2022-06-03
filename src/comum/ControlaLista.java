@@ -90,7 +90,7 @@ public class ControlaLista implements Serializable{
         }
     }
     
-    public int AlugarFilme(String nomeFilme, int ano, String cpf){
+    public int AlugarFilme(String nomeFilme, int ano, String cpf, String start, String end){
         int posicaoC = -1;
         int posicaoF = -1;
 
@@ -119,7 +119,7 @@ public class ControlaLista implements Serializable{
                 if(filme.isAlugado()){
                     return 10;
                 }else{
-                    alugados.add(new Alugado(filme.getId(), cliente.getId()));
+                    alugados.add(new Alugado(filme.getId(), cliente.getId(), start, end));
                     filme.alugar();
                     return 9;
                 }

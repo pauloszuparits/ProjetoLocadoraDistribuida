@@ -14,6 +14,7 @@ public class MsgResp implements Serializable{
     private ArrayList alugados;
     private String str;
     private double taxa;
+    
 
     public MsgResp() {
         this.status = 0;
