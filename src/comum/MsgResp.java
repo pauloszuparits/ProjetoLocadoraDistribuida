@@ -11,6 +11,9 @@ public class MsgResp implements Serializable{
     private Filme filme;
     private ArrayList usuarios;
     private ArrayList filmes;
+    private ArrayList alugados;
+    private String str;
+    private double taxa;
 
     public MsgResp() {
         this.status = 0;
@@ -35,7 +38,18 @@ public class MsgResp implements Serializable{
         this.usuarios = usuarios;
     }
 
+    public MsgResp(int status, double taxa) {
+        this.status = status;
+        this.taxa = taxa;
+    }
+
+    public MsgResp(int status, String str) {
+        this.status = status;
+        this.str = str;
+    }
     
+    
+            
     public int getStatus() {
         return status;
     }
@@ -74,6 +88,30 @@ public class MsgResp implements Serializable{
 
     public void setFilmes(ArrayList filmes) {
         this.filmes = filmes;
+    }
+
+    public double getTaxa() {
+        return taxa;
+    }
+
+    public void setTaxa(double taxa) {
+        this.taxa = taxa;
+    }
+
+    public ArrayList getAlugados() {
+        return alugados;
+    }
+
+    public void setAlugados(ArrayList alugados) {
+        this.alugados = alugados;
+    }
+
+    public String getStr() {
+        return str;
+    }
+
+    public void setStr(String str) {
+        this.str = str;
     }
 
     

@@ -135,140 +135,31 @@ public class Servidor {
                                                         
                         case (8): //calcular taxa
                             double taxa = req.getDias() * 1.50;
-                            resposta.setStatus(1);
-                            resposta.setResposta("A taxa será " + taxa);
+                            resposta.setStatus(18);
+                            resposta.setTaxa(taxa);
                             break;
                             
                         case (9): //calcular multa
                             double multa = req.getDias() * 10.50;
-                            resposta.setStatus(1);
-                            resposta.setResposta("A multa será " + multa);
+                            resposta.setStatus(19);
+                            resposta.setTaxa(multa);
                             break;
                             
                         case (10): //alugar filme
-                            int posicaoC = -1;
-                            int posicaoF = -1;
-                            
-                            for(int i = 0; i < filmes.size(); i++){
-                                if(filmes.get(i).getNome().equals(req.getNomeFilme()) && filmes.get(i).getAno() == req.getAno()){
-                                    posicaoF=i;
-                                    break;
-                                }                               
-                            }
-                            
-                            for(int i = 0; i < usuarios.size(); i++){
-                                if(usuarios.get(i).getCpf().equals(req.getCpf())){
-                                    posicaoC = i;
-                                    break;
-                                }
-                            }
-                            
-                            
-                           
-                            if(posicaoF == -1){
-                                resposta.setStatus(8);
-                                break;
-                            }else{
-                                if(posicaoC == -1){
-                                resposta.setStatus(2);
-                                break;
-                                }else{
-                                    Filme filme = filmes.get(posicaoF);
-                                    Usuario cliente = usuarios.get(posicaoC);
-                                    if(filme.isAlugado()){
-                                        resposta.setStatus(10);
-                                        break;
-                                    }else{
-                                        alugados.add(new Alugado(filme.getId(), cliente.getId()));
-                                        filme.alugar();
-                                        resposta.setStatus(9);
-                                        break;
-                                    }
-                                }
-                            }
+                            resposta.setStatus(controlador.AlugarFilme(req.getNomeFilme(), req.getAno(), req.getCpf()));
                         case 11: //devolver filme
-                            posicaoC = -1;
-                            posicaoF = -1;
-                            int posicaoA = -1;
-                            for(int i = 0; i < filmes.size(); i++){
-                                if(filmes.get(i).getNome().equals(req.getNomeFilme()) && filmes.get(i).getAno() == req.getAno()){
-                                    posicaoF=i;
-                                    break;
-                                }                               
-                            }
+                            resposta.setStatus(controlador.devolverFilme(req.getNomeFilme(), req.getAno(), req.getCpf()));
+                        case 12: //listar alugados
+                            String compilado = controlador.listarAlugados();
                             
-                            for(int i = 0; i < usuarios.size(); i++){
-                                if(usuarios.get(i).getCpf().equals(req.getCpf())){
-                                    posicaoC = i;
-                                    break;
-                                }
-                            }
-                            if(posicaoF == -1){
-                                resposta.setStatus(8);
-                                break;
-                            }
-                            if(posicaoC == -1){
-                                resposta.setStatus(2);
-                                break;
-                            }
-                            
-                            
-                            Filme filme = filmes.get(posicaoF);
-                            Usuario cliente = usuarios.get(posicaoC);
-                            
-                            for(int i = 0; i < alugados.size(); i++){
-                                if(alugados.get(i).getIdFilme() == filme.getId() && alugados.get(i).getIdUsuario() == cliente.getId()){
-                                    posicaoA = i;
-                                    break;
-                                }
-                            }
-                            
-                            if(posicaoA == -1){
-                                //filme nao foi alugado
-                                resposta.setStatus(11);
-                                break;
-                            }
-                            
-                            if(alugados.get(posicaoA).getIdUsuario() == cliente.getId()){
-                                alugados.remove(posicaoA);
-                                filme.alugar();
-                                resposta.setStatus(12);
-                                break;
-                                //alugado
-                            }else{
-                                resposta.setStatus(13);
-                                break;
-                                //não foi alugado para ele
-                            }
-                        case 12:
-                            String compilado = " ";
-                            for(int i = 0; i<alugados.size(); i++){
-                                //compilado = "Filme: " + alugados.get(i).getIdFilme() + "Usuario: " + alugados.get(i).getIdUsuario();
-                                for(int q = 0; q< filmes.size(); q++)
-                                {
-                                    if(alugados.get(i).getIdFilme() == filmes.get(q).getId())
-                                    {
-                                        compilado += "\nFilme " + filmes.get(q).getNome() + " de " + filmes.get(q).getAno();
-                                        break;
-                                    }
-                                }
-                                for(int f = 0; f< usuarios.size(); f++){
-                                    if(alugados.get(i).getIdUsuario() == usuarios.get(f).getId())
-                                    {
-                                        compilado += "\nAlugado por: " + usuarios.get(f).getNome() + " " + usuarios.get(f).getSobrenome();
-                                    }
-                                }
-                            }
-                            
-                            if(compilado == " "){
+                            if(compilado.equals("")){
                                 resposta.setStatus(14);
                                 break;
                             }else{
-                                resposta.setStatus(1);
-                                resposta.setResposta(compilado);
+                                resposta.setStatus(20);
+                                resposta.setStr(compilado);
                                 break;
                             }
-                            
                         default:
                             System.out.println("Servidor encerrado a conexão...");
                             resposta.setStatus(99);

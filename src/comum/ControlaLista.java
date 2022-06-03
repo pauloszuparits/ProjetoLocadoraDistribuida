@@ -89,4 +89,116 @@ public class ControlaLista implements Serializable{
            return filmes.remove(posicao);
         }
     }
+    
+    public int AlugarFilme(String nomeFilme, int ano, String cpf){
+        int posicaoC = -1;
+        int posicaoF = -1;
+
+        for(int i = 0; i < filmes.size(); i++){
+            if(filmes.get(i).getNome().equals(nomeFilme) && filmes.get(i).getAno() == ano){
+                posicaoF=i;
+                break;
+            }                               
+        }
+
+        for(int i = 0; i < usuarios.size(); i++){
+            if(usuarios.get(i).getCpf().equals(cpf)){
+                posicaoC = i;
+                break;
+            }
+        }
+
+        if(posicaoF == -1){
+            return 8;
+        }else{
+            if(posicaoC == -1){
+            return 2;
+            }else{
+                Filme filme = filmes.get(posicaoF);
+                Usuario cliente = usuarios.get(posicaoC);
+                if(filme.isAlugado()){
+                    return 10;
+                }else{
+                    alugados.add(new Alugado(filme.getId(), cliente.getId()));
+                    filme.alugar();
+                    return 9;
+                }
+            }
+        }
+    }
+    
+    public int devolverFilme(String nomeFilme, int ano, String cpf){
+        int posicaoC = -1;
+        int posicaoF = -1;
+        int posicaoA = -1;
+        for(int i = 0; i < filmes.size(); i++){
+            if(filmes.get(i).getNome().equals(nomeFilme) && filmes.get(i).getAno() == ano){
+                posicaoF=i;
+                break;
+            }                               
+        }
+
+        for(int i = 0; i < usuarios.size(); i++){
+            if(usuarios.get(i).getCpf().equals(cpf)){
+                posicaoC = i;
+                break;
+            }
+        }
+        if(posicaoF == -1){
+            return 8;
+        }
+        if(posicaoC == -1){
+            return 2;
+        }
+
+
+        Filme filme = filmes.get(posicaoF);
+        Usuario cliente = usuarios.get(posicaoC);
+
+        for(int i = 0; i < alugados.size(); i++){
+            if(alugados.get(i).getIdFilme() == filme.getId() && alugados.get(i).getIdUsuario() == cliente.getId()){
+                posicaoA = i;
+                break;
+            }
+        }
+
+        if(posicaoA == -1){
+            //filme nao foi alugado
+            return 11;
+        }
+
+        if(alugados.get(posicaoA).getIdUsuario() == cliente.getId()){
+            alugados.remove(posicaoA);
+            filme.alugar();
+            return 12;
+            //alugado
+        }else{
+            return 13;
+            //não foi alugado para ele
+        }
+    }
+    
+    public String listarAlugados(){
+        String compilado = " ";
+        for(int i = 0; i<alugados.size(); i++){
+
+            for(int q = 0; q< filmes.size(); q++)
+            {
+                if(alugados.get(i).getIdFilme() == filmes.get(q).getId())
+                {
+                    compilado += "\nFilme " + filmes.get(q).getNome() + " de " + filmes.get(q).getAno();
+                    break;
+                }
+            }
+            for(int f = 0; f< usuarios.size(); f++){
+                if(alugados.get(i).getIdUsuario() == usuarios.get(f).getId())
+                {
+                    compilado += "\nAlugado por: " + usuarios.get(f).getNome() + " " + usuarios.get(f).getSobrenome();
+                }
+            }
+
+        }
+        
+        return compilado;
+    }
 }

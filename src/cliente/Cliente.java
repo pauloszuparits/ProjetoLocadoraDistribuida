@@ -20,6 +20,7 @@ public class Cliente {
         }
     }
 
+    
     public static void main(String args[]){
         int option = 0; //variavel para menu
         
@@ -31,6 +32,8 @@ public class Cliente {
         
         Scanner in = new Scanner(System.in);//scanner
         
+        ArrayList alugados; 
+        
         //declaração de variaveis
         String nomeCliente, sobrenome,cpf, nomeFilme, genero, compilado;
         int idade, ano, dias;
@@ -38,7 +41,7 @@ public class Cliente {
         
         System.out.println("Bem vindo a locadora!");
         
-        do{ //loop, quebra loop com o numero 1313 digitado
+        do{ 
             System.out.println("Digite uma das opções abaixo");
             System.out.println("0 - Cadastrar Cliente");//
             System.out.println("1 - Cadastrar Filme");//
@@ -208,7 +211,7 @@ public class Cliente {
                     System.out.println("Este filme nao foi alugado para este CPF");
                     break;
                 case(14):
-                    System.out.println("Lista de filmes alugados vazia");
+                    System.out.println("Lista de alugados vazia");
                     break;
                 case(15)://Fazer for de listas                  
                     ArrayList usuarios = resposta.getUsuarios();
@@ -233,14 +236,21 @@ public class Cliente {
                         
                     System.out.println(compilado);
                     break;
-                
+                case(18):
+                    System.out.println("A taxa será de: " + resposta.getTaxa());
+                    break;
+                case(19):
+                    System.out.println("A multa será de: " + resposta.getTaxa());
+                    break;
+                case(20):
+                    System.out.println(resposta.getStr());
+                    break;
+                    
                 case (99):
                     System.out.println("Servidor encerrou a conexão");
                     break;
             }
-            
-            
-            
+                       
     
         }while(option != 99);
         try {
