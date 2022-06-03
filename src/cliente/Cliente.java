@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 import comum.*;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Cliente {
 
@@ -31,8 +32,9 @@ public class Cliente {
         Scanner in = new Scanner(System.in);//scanner
         
         //declaração de variaveis
-        String nomeCliente, sobrenome,cpf, nomeFilme, genero;
+        String nomeCliente, sobrenome,cpf, nomeFilme, genero, compilado;
         int idade, ano, dias;
+
         
         System.out.println("Bem vindo a locadora!");
         
@@ -165,14 +167,14 @@ public class Cliente {
                     System.out.println("Cadastro efetuado com sucesso!");
                     break;
                 case(1):                    
-                    System.out.println(resposta.getResposta());
+                    System.out.println(resposta.getUsuario().toString()); //utlizar objeto
                     break;
                 case(2):
                     System.out.println("Usuário não encontrado");
                     break;
                 case(3):
                     System.out.println("Usuário removido com sucesso");
-                    System.out.println(resposta.getResposta());
+                    System.out.println(resposta.getUsuario().toString());
                     break;
                 case(4):
                     System.out.println("Lista de usuarios vazia!");
@@ -182,7 +184,7 @@ public class Cliente {
                     break;
                 case(6):
                     System.out.println("Filme removido com sucesso");
-                    System.out.println(resposta.getResposta());
+                    System.out.println(resposta.getFilme().toString());
                     break;
                 case (7):
                     System.out.println("Filme alugado com sucesso");
@@ -207,6 +209,29 @@ public class Cliente {
                     break;
                 case(14):
                     System.out.println("Lista de filmes alugados vazia");
+                    break;
+                case(15)://Fazer for de listas                  
+                    ArrayList usuarios = resposta.getUsuarios();
+                    compilado = "";
+                    
+                    for(int i = 0; i < usuarios.size(); i++){
+                        compilado += usuarios.get(i).toString() + "\n";
+                    }
+                        
+                    System.out.println(compilado);
+                    break;
+                case(16):
+                    System.out.println(resposta.getFilme().toString());
+                    break;
+                case(17):
+                    ArrayList filmes = resposta.getFilmes();
+                    compilado = "";
+                    
+                    for(int i = 0; i < filmes.size(); i++){
+                        compilado += filmes.get(i).toString() + "\n";
+                    }
+                        
+                    System.out.println(compilado);
                     break;
                 
                 case (99):

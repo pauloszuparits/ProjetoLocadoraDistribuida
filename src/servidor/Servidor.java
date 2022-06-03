@@ -25,9 +25,9 @@ public class Servidor {
 
     public static void main(String args[]) {
         
-        ArrayList<Usuario> usuarios = new ArrayList(); //instancia array list usuario
-        ArrayList<Filme> filmes = new ArrayList(); //instancia array list filme
-        ArrayList<Alugado> alugados = new ArrayList(); //instancioa array list alugado
+        ControlaLista controlador = new ControlaLista();
+        Usuario usuario;
+        Filme filme;
         
         //inicialização dos ID's
         int idFilme = 0;
@@ -49,142 +49,102 @@ public class Servidor {
                 
                     switch(req.getOpcao()){
                         case (0): //Cadastrar usuario
-                            idUsuario++;
-                            usuarios.add(new Usuario(req.getNomeUsuario(), 
-                                                     req.getSobrenomeUsuario(), 
-                                                     req.getCpf(), 
-                                                     req.getIdade(), 
-                                                     idUsuario));
-                            
+                            controlador.addUser(req.getNomeUsuario(),
+                                                req.getSobrenomeUsuario() ,
+                                                req.getCpf() ,
+                                                req.getIdade());
                             resposta.setStatus(0);
-
                             break;
                             
                         case (1): //Cadastrar filme
-                            idFilme++;
-                            filmes.add(new Filme(req.getNomeFilme(), 
+                            controlador.addFilme(req.getNomeFilme(), 
                                                  req.getGenero(), 
-                                                 req.getAno(), 
-                                                 idFilme));
+                                                 req.getAno());
                             resposta.setStatus(0);
                             break;
                             
                         case (2): //buscar usuário
-                            posicao = -1;
-                            for(int i = 0; i < usuarios.size(); i++){
-                                if(usuarios.get(i).getCpf().equals(req.getCpf())){
-                                    posicao = i; 
-                                    break;
-                                }
-                            }
-                            
-                            
-                            
-                            
-                            if(posicao == -1){
+                            usuario = controlador.buscarUser(req.getCpf());
+                                                                                                                
+                            if(usuario == null){ 
                                 resposta.setStatus(2);
-                            }else{
-                                resposta.setStatus(1);
-                                resposta.setResposta(usuarios.get(posicao).toString());
-                            }
-                            
-                            break;
-                            
-                        case (3): //buscar filme
-                            posicao = -1;
-                            for(int i = 0; i < filmes.size(); i++){
-                                if(filmes.get(i).getNome().equals(req.getNomeFilme()) && filmes.get(i).getAno() == req.getAno()){
-                                    posicao=i;
-                                    break;
-                                }                               
-                            }
-                            
-                            if(posicao == -1){
-                                resposta.setStatus(8);
-                            }else{
-                                resposta.setStatus(1);
-                                resposta.setResposta(filmes.get(posicao).toString());
-                            }
-                            
-                            
-                            break;
-                        
-                        case(4)://listar clientes 
-                            if(usuarios.size() == 0){
-                                resposta.setStatus(4);
                                 break;
                             }else{
-                                String compilado = "";
-                                for(int i = 0; i < usuarios.size(); i++){
-                                    compilado += usuarios.get(i).toString() + "\n";
-                                }
-
-                                resposta.setResposta(compilado);
                                 resposta.setStatus(1);
+                                resposta.setUsuario(usuario);
+                                break;
                             }
-                            break;
-                        case (5): //listar filmes
-                            if(filmes.size()==0){
+                                                                                    
+                        case (3): //buscar filme
+                            filme = controlador.buscaFilme(req.getNomeFilme(), req.getAno());
+                            
+                            if(filme == null){ 
+                                resposta.setStatus(8);
+                                break;
+                            }else{
+                                resposta.setStatus(16);
+                                resposta.setFilme(filme);
+                                break;
+                            }                           
+                                                                                
+                        case(4)://listar clientes 
+                            
+                            ArrayList usuarios = controlador.listarUsuarios();
+                            if(usuarios.isEmpty()){
+                                resposta.setStatus(4);
+                                 break;
+                            }else{
+                                resposta.setStatus(15);
+                                resposta.setUsuarios(usuarios);
+                                break;
+                            }
+                           
+                            
+                        case (5): //listar filmes                           
+                            ArrayList filmes = controlador.listarFilmes();
+                            if(filmes.isEmpty()){
                                 resposta.setStatus(5);
                                 break;
                             }else{
-                                String compilado = " ";
-                                for(int i = 0; i < filmes.size(); i++){
-                                    compilado += filmes.get(i).toString() + "\n";
-                                }
-
-                                resposta.setResposta(compilado);
-                                resposta.setStatus(1);
+                                resposta.setStatus(17);
+                                resposta.setFilmes(filmes);
                                 break;
                             }
+                            
                         case (6): //remover cliente
-                            posicao = -1;
-                            for(int i = 0; i < usuarios.size(); i++){
-                                if(usuarios.get(i).getCpf().equals(req.getCpf())){
-                                    posicao = i;
-                                    break;
-                                }
-                            }
-                            
-                            
-                            if(posicao == -1){
+                            usuario = controlador.removerUsuario(req.getCpf());
+                            if(usuario == null){
                                 resposta.setStatus(2);
+                                break;
                             }else{
                                 resposta.setStatus(3);
-                                Usuario removidoC = usuarios.remove(posicao);
-                                resposta.setResposta(removidoC.toString());
-                            }
-                            
-                            break;
+                                resposta.setUsuario(usuario);
+                                break;
+                            }                                                      
+                                                       
                         case (7): //remover filme
-                            posicao = -1;
-                            for(int i = 0; i < filmes.size(); i++){
-                                if(filmes.get(i).getNome().equals(req.getNomeFilme()) && filmes.get(i).getAno() == req.getAno()){
-                                    posicao=i;
-                                    break;
-                                }                               
-                            }
-                            
-                            
-                            
-                            if(posicao == -1){
+                            filme = controlador.removerFilme(req.getNomeFilme(), req.getAno());
+                            if(filme == null){
                                 resposta.setStatus(8);
+                                break;
                             }else{
                                 resposta.setStatus(6);
-                                Filme removidoF = filmes.remove(posicao);
-                                resposta.setResposta(removidoF.toString());
+                                resposta.setFilme(filme);
+                                break;
                             }
-                            break;
+                                                        
                         case (8): //calcular taxa
                             double taxa = req.getDias() * 1.50;
                             resposta.setStatus(1);
                             resposta.setResposta("A taxa será " + taxa);
                             break;
+                            
                         case (9): //calcular multa
                             double multa = req.getDias() * 10.50;
                             resposta.setStatus(1);
                             resposta.setResposta("A multa será " + multa);
                             break;
+                            
                         case (10): //alugar filme
                             int posicaoC = -1;
                             int posicaoF = -1;

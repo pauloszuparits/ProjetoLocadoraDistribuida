@@ -1,12 +1,16 @@
 
 package comum;
-
+import java.util.ArrayList;
 import java.io.Serializable;
 
 public class MsgResp implements Serializable{
     
     private int status;
-    private String resposta;
+    
+    private Usuario usuario;
+    private Filme filme;
+    private ArrayList usuarios;
+    private ArrayList filmes;
 
     public MsgResp() {
         this.status = 0;
@@ -16,11 +20,22 @@ public class MsgResp implements Serializable{
         this.status = status;
     }
     
-    public MsgResp(int status, String resposta){
+    public MsgResp(int status, Usuario resposta){
         this.status = status;
-        this.resposta = resposta;
+        this.usuario = resposta;
+    }
+    
+    public MsgResp(int status, Filme resposta){
+        this.status = status;
+        this.filme = resposta;
     }
 
+    public MsgResp(int status, ArrayList usuarios) {
+        this.status = status;
+        this.usuarios = usuarios;
+    }
+
+    
     public int getStatus() {
         return status;
     }
@@ -29,13 +44,39 @@ public class MsgResp implements Serializable{
       this.status = status;
     }
 
-    public String getResposta() {
-        return resposta;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setResposta(String resposta) {
-        this.resposta = resposta;
+    public Filme getFilme() {
+        return filme;
     }
+
+    public ArrayList getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setFilme(Filme filme) {
+        this.filme = filme;
+    }
+
+    public void setUsuarios(ArrayList usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public ArrayList getFilmes() {
+        return filmes;
+    }
+
+    public void setFilmes(ArrayList filmes) {
+        this.filmes = filmes;
+    }
+
+    
     
     
 }
