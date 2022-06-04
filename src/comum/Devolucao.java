@@ -18,7 +18,10 @@ public class Devolucao implements Serializable{
         this.nomeUsuario = nomeUsuario;
         this.sobrenome = sobrenome;
     }
-
+    
+    public Devolucao() {       
+    }
+    
     public Devolucao(int status) {
         this.status = status;
     }

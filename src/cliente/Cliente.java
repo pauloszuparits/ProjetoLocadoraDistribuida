@@ -211,7 +211,7 @@ public class Cliente {
                     System.out.println("Filme nao foi alugado");
                     break;
                 case(12):
-                    System.out.println("Filme devolvido com sucesso");
+                    System.out.println("Filme" + resposta.getDevolver().getNomeFilme() + " devolvido com sucesso");
                     System.out.println("Nome do Cliente: " + resposta.getDevolver().getNomeUsuario() 
                                        + " " + resposta.getDevolver().getSobrenome());
                     System.out.println("Taxa: " + resposta.getDevolver().getTaxa());

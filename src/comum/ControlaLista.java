@@ -217,7 +217,8 @@ public class ControlaLista implements Serializable{
             for(int f = 0; f< usuarios.size(); f++){
                 if(alugados.get(i).getIdUsuario() == usuarios.get(f).getId())
                 {
-                    compilado += "\nAlugado por: " + usuarios.get(f).getNome() + " " + usuarios.get(f).getSobrenome();
+                    compilado += "\nAlugado por: " + usuarios.get(f).getNome() + " " + usuarios.get(f).getSobrenome()
+                                  + "\nDa data:" + alugados.get(i).getStartDate() + " até " + alugados.get(i).getEndDate();
                 }
             }
 

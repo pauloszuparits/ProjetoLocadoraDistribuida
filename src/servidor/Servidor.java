@@ -164,7 +164,7 @@ public class Servidor {
                             resposta.setDevolver(devolver);
                             break;
 
-                        case 12: //listar alugados
+                        case 12: //listar alugados //todo data
                             String compilado = controlador.listarAlugados();
                             
                             if(compilado.equals("")){
