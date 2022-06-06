@@ -5,15 +5,25 @@ import java.io.Serializable;
 
 public class MsgResp implements Serializable{ //classe para resposta do servidor ao cliente
     
+    //status
     private int status;
     
+    //filme e usuario
     private Usuario usuario;
     private Filme filme;
+    
+    //listas
     private ArrayList usuarios;
     private ArrayList filmes;
     private ArrayList alugados;
+    
+    //string
     private String str;
+    
+    //taxa / multa
     private double taxa;
+    
+    //Devolução
     private Devolucao devolver;
 
     public MsgResp() {

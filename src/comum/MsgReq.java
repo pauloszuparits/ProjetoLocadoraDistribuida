@@ -3,7 +3,7 @@ import java.io.Serializable;
 
 
 
-public class MsgReq implements Serializable{
+public class MsgReq implements Serializable{ //classe para requisição de dados do servidor
     
     //filme
     private String nomeFilme;
