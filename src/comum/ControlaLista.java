@@ -188,9 +188,8 @@ public class ControlaLista implements Serializable{
             double taxa = dias*1.50;
             double multa = 0;
             
-            if(diasDev > dias){
-                double teste  = diasDev-dias;
-                multa = 10.5 * teste;
+            if(diasDev > dias){           
+                multa = 10.5 * (diasDev-dias);
             }
             
             alugados.remove(posicaoA);
