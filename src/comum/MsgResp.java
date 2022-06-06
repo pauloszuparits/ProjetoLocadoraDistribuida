@@ -3,7 +3,7 @@ package comum;
 import java.util.ArrayList;
 import java.io.Serializable;
 
-public class MsgResp implements Serializable{
+public class MsgResp implements Serializable{ //classe para resposta do servidor ao cliente
     
     private int status;
     

@@ -10,23 +10,23 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class ControlaLista implements Serializable{
-    private int idUser = 0;
-    private int idFilme = 0;
+    private int idUser = 0; //gerar id para usuario
+    private int idFilme = 0; //gerar id para filme
     ArrayList<Usuario> usuarios = new ArrayList(); //instancia array list usuario
     ArrayList<Filme> filmes = new ArrayList(); //instancia array list filme
     ArrayList<Alugado> alugados = new ArrayList(); //instancioa array list alugado
     
-    public void addUser(String nome, String sobrenome, String cpf, int idade){
+    public void addUser(String nome, String sobrenome, String cpf, int idade){ //adicionar usuario
         usuarios.add(new Usuario(nome, sobrenome, cpf, idade, idUser));        
         idUser++;
     }
     
-    public void addFilme(String nome, String genero, int ano){
+    public void addFilme(String nome, String genero, int ano){ //adicionar filme
         filmes.add(new Filme(nome, genero, ano, idUser));
         idUser++;
     }
     
-    public Usuario buscarUser(String cpf){
+    public Usuario buscarUser(String cpf){ //buscar usuario, retorna usuario
         int posicao = -1;
         for(int i = 0; i < usuarios.size(); i++){
             if(usuarios.get(i).getCpf().equals(cpf)){
@@ -41,7 +41,7 @@ public class ControlaLista implements Serializable{
         }
     }
     
-    public Filme buscaFilme(String nome, int ano){
+    public Filme buscaFilme(String nome, int ano){ //buscar filme, retorna filme
         int posicao = -1;
         for(int i = 0; i < filmes.size(); i++){
             if(filmes.get(i).getNome().equals(nome) && filmes.get(i).getAno() == ano){
@@ -57,15 +57,15 @@ public class ControlaLista implements Serializable{
         }                           
     }
     
-    public ArrayList listarUsuarios(){
+    public ArrayList listarUsuarios(){ //retorna lista de usuarios
         return usuarios;
     }
     
-    public ArrayList listarFilmes(){
+    public ArrayList listarFilmes(){ //retorna lista de filmes
         return filmes;
     }
     
-    public Usuario removerUsuario(String cpf){
+    public Usuario removerUsuario(String cpf){ //remove um usuario, retorna usuario
         int posicao = -1;
         for(int i = 0; i < usuarios.size(); i++){
             if(usuarios.get(i).getCpf().equals(cpf)){
@@ -80,7 +80,7 @@ public class ControlaLista implements Serializable{
         }
     }
     
-    public Filme removerFilme(String nome, int ano){
+    public Filme removerFilme(String nome, int ano){ //remove um filme, retorna filme
         int posicao = -1;
         for(int i = 0; i < filmes.size(); i++){
             if(filmes.get(i).getNome().equals(nome) && filmes.get(i).getAno() == ano){
@@ -95,7 +95,7 @@ public class ControlaLista implements Serializable{
         }
     }
     
-    public int AlugarFilme(String nomeFilme, int ano, String cpf, String start, String end){
+    public int AlugarFilme(String nomeFilme, int ano, String cpf, String start, String end){ //aluga um filme, retorna status (int)
         int posicaoC = -1;
         int posicaoF = -1;
 
@@ -132,7 +132,7 @@ public class ControlaLista implements Serializable{
         }
     }
     
-    public Devolucao devolverFilme(String nomeFilme, int ano, String cpf, String dataDevolucao) throws ParseException{
+    public Devolucao devolverFilme(String nomeFilme, int ano, String cpf, String dataDevolucao) throws ParseException{ //devolve filme, retorna um objeto devolução
         int posicaoC = -1;
         int posicaoF = -1;
         int posicaoA = -1;
@@ -152,7 +152,7 @@ public class ControlaLista implements Serializable{
             }
         }
         if(posicaoF == -1){
-            return new Devolucao(8);//8
+            return new Devolucao(8);
         }
         if(posicaoC == -1){
             return new Devolucao(2);
@@ -202,7 +202,7 @@ public class ControlaLista implements Serializable{
         }
     }
     
-    public String listarAlugados(){
+    public String listarAlugados(){ //retorna uma string com a lista formatada de filmes alugados
         String compilado = "";
         for(int i = 0; i<alugados.size(); i++){
 

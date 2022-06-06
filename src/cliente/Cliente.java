@@ -11,7 +11,7 @@ public class Cliente {
     static Conexao conexao;
     static Socket socket;
 
-    public Cliente() {
+    public Cliente() { //Criando Socket
         try {
             socket = new Socket("localhost", 9200);
         } // fase de conexao
@@ -24,15 +24,15 @@ public class Cliente {
     public static void main(String args[]){
         int option = 0; //variavel para menu
         
-        int cont = 0;
+        int cont = 0; //variavel para nao instanciar 2 clientes
         
-        MsgReq req = new MsgReq(); //ininialização da requisição
+        MsgReq req = new MsgReq(); //inicialização da requisição
         
         MsgResp resposta = new MsgResp(); //inicialização da resposta
         
-        Scanner in = new Scanner(System.in);//scanner
+        Scanner in = new Scanner(System.in);//inicialização do scanner para entrada de dados
         
-        ArrayList alugados; 
+        ArrayList alugados; //instancia do vetor a ser lido de filmes alugados 
         
         //declaração de variaveis
         String nomeCliente, sobrenome,cpf, nomeFilme, genero, compilado,dMaS, dMaE;
@@ -41,24 +41,25 @@ public class Cliente {
         
         System.out.println("Bem vindo a locadora!");
         
-        do{ 
+        do{ //enquanto nao digitar 99 para sair, o código continua  
             System.out.println("Digite uma das opções abaixo");
-            System.out.println("0 - Cadastrar Cliente");//
-            System.out.println("1 - Cadastrar Filme");//
-            System.out.println("2 - Buscar Cliente");//
-            System.out.println("3 - Buscar Filme");//
-            System.out.println("4 - Listar Clientes");//
-            System.out.println("5 - Listar Filmes");//
-            System.out.println("6 - Remover Cliente");//
-            System.out.println("7 - Remover Filme");//
+            System.out.println("0 - Cadastrar Cliente");
+            System.out.println("1 - Cadastrar Filme");
+            System.out.println("2 - Buscar Cliente");
+            System.out.println("3 - Buscar Filme");
+            System.out.println("4 - Listar Clientes");
+            System.out.println("5 - Listar Filmes");
+            System.out.println("6 - Remover Cliente");
+            System.out.println("7 - Remover Filme");
             System.out.println("8 - Calcular taxa de aluguel");
             System.out.println("9 - Calcular Multa");
             System.out.println("10 - Alugar filme");
             System.out.println("11 - Devolver Filme");
             System.out.println("12 - Listar filmes alugados");
             System.out.println("99 - Sair");
-            option = in.nextInt();
-            //TODO fazer if para saida antes de começar, eviando um option para o servidor
+            option = in.nextInt(); //entrada das opções
+            
+            //switch case para opções
             switch(option){
                 case 0: //cadastrar usuario
                     System.out.println("Digite um nome");
@@ -156,27 +157,28 @@ public class Cliente {
                 case 12: //mostrar lista de filmes alugados
                     req = new MsgReq(option);
                     break;
-                case 99:
+                case 99: //sair
                     System.out.println("Fechando o sistema ...");
                     req = new MsgReq(option);
                     break;
             }
             
-            if(cont == 0){
+            if(cont == 0){ //se ainda nao tiver passado por este trecho, instanciar cliente
                 new Cliente();
             }//instancia Cliente
             cont++;
             
-            conexao.send(socket, req);
+            conexao.send(socket, req); //enviar requisição
 
-            resposta = (MsgResp) conexao.receive(socket);
+            resposta = (MsgResp) conexao.receive(socket); //receber resposta
             
-            switch(resposta.getStatus()){
+            switch(resposta.getStatus()){ //Status de resposta
                 case(0):
                     System.out.println("Cadastro efetuado com sucesso!");
                     break;
-                case(1):                    
-                    System.out.println(resposta.getUsuario().toString()); //utlizar objeto
+                case(1):
+                    System.out.println("Usuario encontrado \n");
+                    System.out.println(resposta.getUsuario().toString()); 
                     break;
                 case(2):
                     System.out.println("Usuário não encontrado");
@@ -194,10 +196,7 @@ public class Cliente {
                 case(6):
                     System.out.println("Filme removido com sucesso");
                     System.out.println(resposta.getFilme().toString());
-                    break;
-                case (7):
-                    System.out.println("Filme alugado com sucesso");
-                    break;
+                    break;               
                 case(8):
                     System.out.println("Filme não encontrado");
                     break;
@@ -208,7 +207,7 @@ public class Cliente {
                     System.out.println("Filme ja foi alugado");
                     break;
                 case(11):
-                    System.out.println("Filme nao foi alugado");
+                    System.out.println("Filme nao foi alugado anteriormente");
                     break;
                 case(12):
                     System.out.println("Filme" + resposta.getDevolver().getNomeFilme() + " devolvido com sucesso");
@@ -224,7 +223,7 @@ public class Cliente {
                 case(14):
                     System.out.println("Lista de alugados vazia");
                     break;
-                case(15)://Fazer for de listas                  
+                case(15):                 
                     ArrayList usuarios = resposta.getUsuarios();
                     compilado = "";
                     
@@ -235,6 +234,7 @@ public class Cliente {
                     System.out.println(compilado);
                     break;
                 case(16):
+                    System.out.println("Filme encontrado\n");
                     System.out.println(resposta.getFilme().toString());
                     break;
                 case(17):

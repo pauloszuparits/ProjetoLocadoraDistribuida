@@ -2,11 +2,8 @@ package comum;
 import java.io.Serializable;
 
 
-/**
- *
- * @author paulo
- */
-public class Filme implements Serializable{
+
+public class Filme implements Serializable{ //classe com os dados de cada filme
     private String nome;
     private String genero;
     private int ano;

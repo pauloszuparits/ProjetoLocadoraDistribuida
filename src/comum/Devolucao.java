@@ -2,7 +2,7 @@
 package comum;
 import java.io.Serializable;
 
-public class Devolucao implements Serializable{
+public class Devolucao implements Serializable{ //classe com dados pertinentes para devolução do filme
     private int status;
     private double taxa;
     private double multa;

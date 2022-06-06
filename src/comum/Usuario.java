@@ -7,7 +7,7 @@ package comum;
  *
  * @author paulo
  */
-public class Usuario implements Serializable{
+public class Usuario implements Serializable{ //classe com os dados dos usuarios/clientes da locadora
         private String nome;
         private String sobrenome;
         private String cpf;

@@ -3,7 +3,7 @@ package comum;
 import java.net.*;
 import java.io.*;
 
-public class Conexao {
+public class Conexao { //classe conexão com as funções send e recieve
 
     public static void send(Socket socket, Object obj) {
         try {

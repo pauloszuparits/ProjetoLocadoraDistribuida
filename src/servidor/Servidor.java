@@ -17,7 +17,7 @@ public class Servidor {
     static String msg;
 
     public Servidor() {
-
+        //Criando socket
         try {
             serversocket = new ServerSocket(9200);
             System.out.println("Servidor locadora no ar ...");
@@ -28,9 +28,9 @@ public class Servidor {
 
     public static void main(String args[]) {
         
-        ControlaLista controlador = new ControlaLista();
-        Usuario usuario;
-        Filme filme;
+        ControlaLista controlador = new ControlaLista(); //funções que operam listas
+        Usuario usuario; //instancia de usuario
+        Filme filme;//instancia de filme
         
         //inicialização dos ID's
         int idFilme = 0;
@@ -40,17 +40,17 @@ public class Servidor {
         MsgReq req = new MsgReq();
         MsgResp resposta = new MsgResp();
         
+        //instancia de devolução
         Devolucao devolver = new Devolucao();
         
         //instancia servidor
         new Servidor();
-        if (connect()) {
+        if (connect()) { //conexão, função estatica chamando
             do{
                 
-                req = (MsgReq) conexao.receive(client_socket);
-                int posicao; //variavel para busca
-                
-                    switch(req.getOpcao()){
+                req = (MsgReq) conexao.receive(client_socket); //requisição enviada pelo cliente
+                               
+                    switch(req.getOpcao()){ //switch com a opção que o cliente enviou
                         case (0): //Cadastrar usuario
                             controlador.addUser(req.getNomeUsuario(),
                                                 req.getSobrenomeUsuario() ,
@@ -164,7 +164,7 @@ public class Servidor {
                             resposta.setDevolver(devolver);
                             break;
 
-                        case 12: //listar alugados //todo data
+                        case 12: //listar alugados 
                             String compilado = controlador.listarAlugados();
                             
                             if(compilado.equals("")){
@@ -175,23 +175,23 @@ public class Servidor {
                                 resposta.setStr(compilado);
                                 break;
                             }
-                        default:
+                        default: //encerrando conexão com o cliente
                             System.out.println("Servidor encerrado a conexão...");
                             resposta.setStatus(99);
                             break;
                     }
 
 
-                    conexao.send(client_socket, resposta);
+                    conexao.send(client_socket, resposta); //envia resposta
 
                     
                 
             }while(req.getOpcao() != 99);
             
-            try {
+            try { //desconexão
                 client_socket.close();
                 serversocket.close();
-            } // desconexao
+            } 
             catch (Exception e) {
                 
                 System.out.println("Nao encerrou a conex�o corretamente" + e.getMessage());
@@ -201,7 +201,7 @@ public class Servidor {
         
     }
     
-    static boolean connect() {
+    static boolean connect() { //função de conexão, estatica
         boolean ret;
         try {
             client_socket = serversocket.accept();              // fase de conexão
@@ -213,36 +213,7 @@ public class Servidor {
         return ret;
     }
     
-    /*static Usuario buscarUser(ArrayList usuarios, String cpf){
-         posicao = -1;
-        for(int i = 0; i < usuarios.size(); i++){
-            if(usuarios.get(i).getCpf().equals(req.getCpf())){
-                posicao = i;
-                break;
-            }
-        }
-
-        if(posicao == -1){
-            resposta.setStatus(2);
-        }else{
-            resposta.setStatus(1);
-            resposta.setResposta(usuarios.get(posicao).toString());
-        }
-        
-        int posicao = -1;
-        for(int i = 0; i < usuarios.size(); i++){
-            if(usuarios.get(i).getCpf().equals(cpf)){
-                posicao = i;
-                break;
-            }
-        }
-        
-        if(posicao == -1){
-            return -1;
-        }else{
-            return usuarios.get(posicao);
-        }
-    }*/
+    
     
 }
     

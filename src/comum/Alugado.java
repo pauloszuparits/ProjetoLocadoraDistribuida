@@ -3,7 +3,7 @@ import java.io.Serializable;
         
 
 
-public class Alugado implements Serializable{
+public class Alugado implements Serializable{ //classe com id do filme alugado + is do cliente que alugou, data de entrega e devolução do filme
     
     private int idFilme;
     private int idUsuario;
