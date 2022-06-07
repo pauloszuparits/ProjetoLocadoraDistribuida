@@ -194,7 +194,7 @@ public class Servidor {
             } 
             catch (Exception e) {
                 
-                System.out.println("Nao encerrou a conex�o corretamente" + e.getMessage());
+                System.out.println("Nao encerrou a conexao corretamente" + e.getMessage());
             }
         }
         

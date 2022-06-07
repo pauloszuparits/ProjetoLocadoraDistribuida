@@ -22,8 +22,8 @@ public class ControlaLista implements Serializable{
     }
     
     public void addFilme(String nome, String genero, int ano){ //adicionar filme
-        filmes.add(new Filme(nome, genero, ano, idUser));
-        idUser++;
+        filmes.add(new Filme(nome, genero, ano, idFilme));
+        idFilme++;
     }
     
     public Usuario buscarUser(String cpf){ //buscar usuario, retorna usuario
