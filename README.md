@@ -91,4 +91,84 @@ A classe possue um método main que irá realizar todas as funcionalidades. Prim
 
 Após isso começa a entrada de dados, que serão enviados ao servidor  
 
-![Exemplo Cadastrar Usuario e Filme Cliente]()
+![Exemplo Cadastrar Usuario e Filme Cliente]()  
+
+#### Usuario  
+
+A classe usuáio possui 5 parametros, sendo eles:
+- String nome;
+- String sobrenome;
+- String cpf;
+- int idade;
+- int id;  
+
+E um construtor que recebe um nome, um sobrenome, um cpf, uma idade e um id.  
+
+![Construtor classe Usuario]()  
+
+##### Métodos
+
+A classe possue "gets e sets" para todos os parametros.
+Também possue um "método mágico" toString().  
+
+![toString Usuario]()  
+
+#### Filme  
+
+A classe filme possue 5 parametros, sendo eles:  
+- String nome;
+- String genero;
+- int ano;
+- boolean alugado = false;
+- int id;  
+
+E um construtor que recebe um nome, um genero, um ano e um id.  
+
+![Construtor classe Filme]()  
+
+##### Métodos  
+
+A classe possue "gets e sets" para todos os parametros.
+Também possue 2 métodos, sendo eles um método mágico toString() e o outro um alugar, que muda o estado da variavel alugado.  
+
+![Métodos da classe Filme]()  
+
+#### Alugado  
+
+A classe Alugado possue 2 parametros, sendo eles:  
+- int idFilme;
+- int idUsuario;
+
+E um construtor que ecebe um idFilme e um idUsuario.
+
+![Construtor classe Alugado]()  
+
+##### Métodos  
+A classe possue "gets e sets" para todos os parametros.  
+
+#### MsgReq  
+
+A classe MsgReq é utilizada para fazer uma requisição do cliente para o servidor. Então a classe possue diversos parametros e diversos construtores. Cada construtor pode auxiliar em uma ou mais funções do servidor.   
+
+![Parametros MsgReq]()  
+
+![Construtores MsgReq]()
+![Construtores MsgReq2]()  
+
+#### MsgResp  
+
+A classe MsgResp é utilizada para enviar uma resposta do servidor ao cliente. A classe possue 2 parametros, sendo eles:  
+- int status;
+- String resposta;  
+
+E 3 construtores, um deles não recebe parametros, o outro recebe apenas um status e o ultimo recebe um status e uma resposta.  
+
+![Construtores classe MsgResp]()  
+
+### Protocolo e Lista de Status  
+
+![Protocolo]()  
+
+![Lista de Status]()
+
+
