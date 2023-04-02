@@ -58,7 +58,10 @@ A classe possui um método main que irá realizar todas as funcionalidades da cl
 
 ![Instanciação Servidor]()  
 
-Caso o servidor tenha se conectado através da funcao connect(), ele recebe uma requisição do cliente indicando qual será a função que o servidor irá efeturar.
+![connect servidor]()  
+
+Caso o servidor tenha se conectado através da funcao connect(), ele recebe uma requisição do cliente indicando qual será a função que o servidor irá efeturar.  
+
 - 0 -> Cadastrar usuário
 - 1 -> Cadastrar filme  
 - 2 -> Buscar usuário  
@@ -74,5 +77,18 @@ Caso o servidor tenha se conectado através da funcao connect(), ele recebe uma 
 - 12 -> Listar filmes alugados
 - 99 -> Desligar servidor
 
+![Exemplo funcionalidade cadastrar usuário e filme servidor]()  
 
+#### Cliente  
 
+A classe cliente é responsável por pegar as entradas do usuário e se comunicar com o servidor para que ele faça o devido processamento destas entradas. Logo de inicio, a classe cliente inicia os sockets:  
+
+![Inicio Socket Cliente]()  
+
+A classe possue um método main que irá realizar todas as funcionalidades. Primeiramente são instanciados um MsgReq e MsgResp, que serão as classes de requisição e resposta e um Scanner que irá fazer a entrada de dados. 
+
+![Instanciação Cliente]()
+
+Após isso começa a entrada de dados, que serão enviados ao servidor  
+
+![Exemplo Cadastrar Usuario e Filme Cliente]()
